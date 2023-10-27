@@ -17,22 +17,42 @@ namespace ParksApi.Controllers
 
     // GET api/parks
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> Get(string name, int fee)
+    public async Task<ActionResult<IEnumerable<Park>>> Get()
     {
-      IQueryable<Park> query = _db.Parks.AsQueryable();
-
-      if(name != null)
-      {
-        query = query.Where(entry => entry.Name == name);
-      }
-
-      if(fee >= 0)
-      {
-        query = query.Where(entry => entry.Fee == fee);
-      }
-
-      return await query.ToListAsync();
+      return await _db.Parks.ToListAsync();
     }
+    // [HttpGet]
+    // public async Task<ActionResult<List<Park>>> Get(string name, int fee, string status, bool campingAllowed, bool dogsAllowed)
+    // {
+    //   IQueryable<Park> query = _db.Parks.AsQueryable();
+
+    //   if(name != null)
+    //   {
+    //     query = query.Where(entry => entry.Name == name);
+    //   }
+
+    //   if(fee >= 0)
+    //   {
+    //     query = query.Where(entry => entry.Fee == fee);
+    //   }
+
+    //   if(status != null)
+    //   {
+    //     query = query.Where(entry => entry.Status == status);
+    //   }
+
+    //   if(campingAllowed != null)
+    //   {
+    //     query = query.Where(entry => entry.CampingAllowed == campingAllowed);
+    //   }
+
+    //   if(dogsAllowed != null)
+    //   {
+    //     query = query.Where(entry => entry.DogsAllowed == dogsAllowed);
+    //   }
+
+    //   return await query.ToListAsync();
+    // }
 
     // GET api/parks/2
     [HttpGet("{id}")]
