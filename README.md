@@ -4,12 +4,12 @@
 
 ## Description
 
-A Web API app that shares data about state and national parks in the State of Oregon -- complete with full CRUD functionality. Data is accessible by a client. Pagination is used to display a limited number of results at a time.
+A Web API app that shares data about state and national parks in the State of Oregon complete with full CRUD functionality. Data is accessible by a client. Pagination is used to display a limited number of results at a time.
 
 - _This web API application is written using C#, run using .NET framework, and database query and relationships handled with Entity Framework Core._
 - _Data annotations validate input._
 - _Full CRUD functionality for the `Park` class / model._
-- _Data storage is managed using MySQL. Entity Framework Core .NET Command-line Tools (or dotnet ef) is used for database version control -- migrations are created to tell MySQL how the database is structured and updated as needed._
+- _Data storage is managed using MySQL. Entity Framework Core .NET Command-line Tools (or dotnet ef) is used for database version control -- migrations inform MySQL on database structure and updates._
 - _Swashbuckle (Swagger, Swagger UI) and Postman are used to document and test API endpoints._
 
 ## Technologies Used
@@ -49,7 +49,7 @@ _3. Clone the repository from the GitHub link by entering in this command:_
 
 #### Set up a Connection String to Database
 
-_Navigate to the project's production directory `ParksApi.Solution/ParksApi`, and create a new file called `appsettings.json`. Within the `appsettings.json` file, add the following code snippet. Change the server and port and needed. Replace the `uid`, and `pwd` values with your username and password for MySQL. Under `database`, add a fitting name -- although `parks_api` is suggested for clarity of purpose._
+_Navigate to the project's production directory `ParksApi.Solution/ParksApi`. Create a new file called `appsettings.json`. Within the `appsettings.json` file, add the following code snippet. Change the server and port as needed. Replace the `uid`, and `pwd` values with your username and password for MySQL. Under `database`, add a fitting name -- although `parks_api` is suggested for clarity of purpose._
 
 ```json
 {
@@ -68,7 +68,7 @@ _Navigate to the project's production directory `ParksApi.Solution/ParksApi`, an
 
 #### Check for Port Conflicts
 
-_Make sure your ports are different for this Web API app and your client app if you are running a client app as a means to make requests from the API. In this app's `Properties/launchSettings.json` file, check to see that the `applicationUrl` key is set to a different set of ports than your client app. (in the ParksApi app, we have ports set to 5001 and 5000 as shown in the `launchSettings.json` snippet below)._
+_In this app's `Properties/launchSettings.json` file, check to see that the `applicationUrl` key is set to a different set of ports than your client app -- if using one to query the API endpoints. In the ParksApi app, we have ports set to 5001 and 5000 as shown in the `launchSettings.json` snippet below._
 
 ```json
 "ParksApi": {
@@ -107,7 +107,7 @@ To explore the API endpoints, use a client such as a browser, Postman, or Swagge
 
 ParksApi is set to return the first index of results, and show up to 10 results per page. To make modifications, opt to do one of the following:
 
-- _Navigate to the project's Controller directory, file `ParksController.cs`, and edit the HttpGet controller's Get() action parameters `pageIndex = 1` and `int pageSize = 10` to different integer values for pageIndex and pageSize, respectively._
+- _Navigate to the project's Controller directory, file `ParksController.cs` to edit the HttpGet controller's Get() action parameters `pageIndex = 1` and `int pageSize = 10`. This allows customization of values for pageIndex and pageSize._
 - _Change the parameters in the http request: `http://localhost:5000/api/Parks?pageIndex=1&pageSize=10`. Set the parameters `pageIndex` and `pageSize` to different integer values, such as 2 for pageIndex to see the second page of all results, and 20 for pageSize to return twenty results per page, respectively._
 
 ### API Endpoints
@@ -168,10 +168,10 @@ http://localhost:5000/api/Parks?feeRequired=no&status=open&pageIndex=1&pageSize=
 ```json
 [
   {
-    "parkId": 1,
-    "name": "Crater Lake",
-    "description": "Crater Lake inspires awe.",
-    "feeRequired": "yes",
+    "parkId": 2,
+    "name": "Agate Beach State Recreation Site",
+    "description": "No agates, but a great place to see the sunset.",
+    "feeRequired": "no",
     "status": "open",
     "campingAllowed": "yes",
     "dogsAllowed": "yes"
@@ -181,7 +181,7 @@ http://localhost:5000/api/Parks?feeRequired=no&status=open&pageIndex=1&pageSize=
 
 ## Known Bugs
 
-- _Currently no known bugs. Kindly notify me if you happen upon one: joncheng.dev@gmail.com_
+- _Currently no known bugs. Kindly let me know if you happen upon one: joncheng.dev@gmail.com_
 
 ## License
 
