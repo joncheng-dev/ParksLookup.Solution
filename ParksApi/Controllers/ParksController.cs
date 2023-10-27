@@ -17,7 +17,7 @@ namespace ParksApi.Controllers
 
     // GET api/parks
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> Get(string name, string feeRequired, string status, string campingAllowed, string dogsAllowed)
+    public async Task<ActionResult<PaginatedList<Park>>> Get(string name, string feeRequired, string status, string campingAllowed, string dogsAllowed, int pageIndex = 1, int pageSize = 10)
     {
       IQueryable<Park> query = _db.Parks.AsQueryable();
 
@@ -46,7 +46,14 @@ namespace ParksApi.Controllers
         query = query.Where(entry => entry.DogsAllowed == dogsAllowed);
       }
 
-      return await query.ToListAsync();      
+      var paginatedListOfParks = await PaginatedList<Park>.CreateAsync(query, pageIndex, pageSize);
+
+      if(paginatedListOfParks.Count == 0)
+      {
+        return NotFound();
+      }
+
+      return paginatedListOfParks;  
     }
 
     // GET api/parks/2
