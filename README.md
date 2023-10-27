@@ -181,7 +181,7 @@ http://localhost:5000/api/Parks?feeRequired=no&status=open&pageIndex=1&pageSize=
 
 ## Known Bugs
 
-- _Currently no known bugs. Kindly let me know if you happen upon one: joncheng.dev@gmail.com_
+- _Currently no known bugs. Kindly let me know if you happen upon one or would like to say hello: joncheng.dev@gmail.com_
 
 ## License
 
