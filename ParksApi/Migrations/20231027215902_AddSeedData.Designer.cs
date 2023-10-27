@@ -10,7 +10,7 @@ using ParksApi.Models;
 namespace ParksApi.Migrations
 {
     [DbContext(typeof(ParksApiContext))]
-    [Migration("20231027212506_AddSeedData")]
+    [Migration("20231027215902_AddSeedData")]
     partial class AddSeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,10 @@ namespace ParksApi.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int>("Fee")
-                        .HasColumnType("int");
+                    b.Property<string>("FeeRequired")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -65,7 +67,7 @@ namespace ParksApi.Migrations
                             CampingAllowed = "yes",
                             Description = "Crater Lake inspires awe.",
                             DogsAllowed = "yes",
-                            Fee = 30,
+                            FeeRequired = "yes",
                             Name = "Crater Lake",
                             Status = "open"
                         },
@@ -75,7 +77,7 @@ namespace ParksApi.Migrations
                             CampingAllowed = "yes",
                             Description = "No agates, but a great place to see the sunset.",
                             DogsAllowed = "yes",
-                            Fee = 0,
+                            FeeRequired = "no",
                             Name = "Agate Beach State Recreation Site",
                             Status = "open"
                         },
@@ -85,7 +87,7 @@ namespace ParksApi.Migrations
                             CampingAllowed = "yes",
                             Description = "This park has great birdwatching and tidepools to explore.",
                             DogsAllowed = "yes",
-                            Fee = 0,
+                            FeeRequired = "no",
                             Name = "Fogarty Creek State Recreation Area",
                             Status = "open"
                         },
@@ -95,7 +97,7 @@ namespace ParksApi.Migrations
                             CampingAllowed = "no",
                             Description = "Eons of acidic water seeping into marble rock created and decorated these wondrous marble halls.",
                             DogsAllowed = "no",
-                            Fee = 5,
+                            FeeRequired = "yes",
                             Name = "Oregon Caves National Monument",
                             Status = "closed"
                         },
@@ -105,7 +107,7 @@ namespace ParksApi.Migrations
                             CampingAllowed = "no",
                             Description = "Colorful rock formations preserve a world class record of plant and animal evolution, changing climate, and past ecosystems that span over 40 million years.",
                             DogsAllowed = "no",
-                            Fee = 0,
+                            FeeRequired = "no",
                             Name = "John Day Fossil Beds National Monument",
                             Status = "open"
                         },
@@ -115,7 +117,7 @@ namespace ParksApi.Migrations
                             CampingAllowed = "yes",
                             Description = "This convergence of three geologically distinct mountain ranges has resulted in an area with unparalleled biological diversity and a tremendously varied landscape.",
                             DogsAllowed = "yes",
-                            Fee = 0,
+                            FeeRequired = "no",
                             Name = "Cascade-Siskiyou National Monument",
                             Status = "open"
                         });

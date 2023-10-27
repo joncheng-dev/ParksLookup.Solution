@@ -4,10 +4,14 @@
 
 namespace ParksApi.Migrations
 {
-    public partial class AddDataAnnotationsToModel : Migration
+    public partial class AddModelDataAnnotations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "Fee",
+                table: "Parks");
+
             migrationBuilder.UpdateData(
                 table: "Parks",
                 keyColumn: "Status",
@@ -102,10 +106,23 @@ namespace ParksApi.Migrations
                 oldNullable: true)
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.AddColumn<string>(
+                name: "FeeRequired",
+                table: "Parks",
+                type: "varchar(20)",
+                maxLength: 20,
+                nullable: false,
+                defaultValue: "")
+                .Annotation("MySql:CharSet", "utf8mb4");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "FeeRequired",
+                table: "Parks");
+
             migrationBuilder.AlterColumn<string>(
                 name: "Status",
                 table: "Parks",
@@ -160,6 +177,13 @@ namespace ParksApi.Migrations
                 oldMaxLength: 20)
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Fee",
+                table: "Parks",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
         }
     }
 }
