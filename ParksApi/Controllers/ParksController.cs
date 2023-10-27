@@ -79,5 +79,21 @@ namespace ParksApi.Controllers
     {
       return _db.Parks.Any(entry => entry.ParkId == id);
     }
+
+    // DELETE api/Parks/3
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePark(int id)
+    {
+      Park targetPark = await _db.Parks.FindAsync(id);
+      if(targetPark == null)
+      {
+        return NotFound();
+      }
+
+      _db.Parks.Remove(targetPark);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
   }
 }
