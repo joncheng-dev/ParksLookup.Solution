@@ -10,7 +10,7 @@ using ParksApi.Models;
 namespace ParksApi.Migrations
 {
     [DbContext(typeof(ParksApiContext))]
-    [Migration("20231027183105_Initial")]
+    [Migration("20231027211758_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,14 +26,14 @@ namespace ParksApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("CampingAllowed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("CampingAllowed")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<bool>("DogsAllowed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("DogsAllowed")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Fee")
                         .HasColumnType("int");

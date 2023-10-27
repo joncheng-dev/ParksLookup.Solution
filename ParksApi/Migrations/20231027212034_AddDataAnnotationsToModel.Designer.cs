@@ -10,8 +10,8 @@ using ParksApi.Models;
 namespace ParksApi.Migrations
 {
     [DbContext(typeof(ParksApiContext))]
-    [Migration("20231027184053_AddModelDataAnnotations")]
-    partial class AddModelDataAnnotations
+    [Migration("20231027212034_AddDataAnnotationsToModel")]
+    partial class AddDataAnnotationsToModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,16 +26,20 @@ namespace ParksApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("CampingAllowed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("CampingAllowed")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<bool>("DogsAllowed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("DogsAllowed")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int>("Fee")
                         .HasColumnType("int");

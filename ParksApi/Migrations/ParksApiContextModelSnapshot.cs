@@ -24,16 +24,20 @@ namespace ParksApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("CampingAllowed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("CampingAllowed")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<bool>("DogsAllowed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("DogsAllowed")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int>("Fee")
                         .HasColumnType("int");
@@ -56,9 +60,9 @@ namespace ParksApi.Migrations
                         new
                         {
                             ParkId = 1,
-                            CampingAllowed = true,
+                            CampingAllowed = "yes",
                             Description = "Crater Lake inspires awe.",
-                            DogsAllowed = true,
+                            DogsAllowed = "yes",
                             Fee = 30,
                             Name = "Crater Lake",
                             Status = "open"
@@ -66,9 +70,9 @@ namespace ParksApi.Migrations
                         new
                         {
                             ParkId = 2,
-                            CampingAllowed = true,
+                            CampingAllowed = "yes",
                             Description = "No agates, but a great place to see the sunset.",
-                            DogsAllowed = true,
+                            DogsAllowed = "yes",
                             Fee = 0,
                             Name = "Agate Beach State Recreation Site",
                             Status = "open"
@@ -76,9 +80,9 @@ namespace ParksApi.Migrations
                         new
                         {
                             ParkId = 3,
-                            CampingAllowed = true,
+                            CampingAllowed = "yes",
                             Description = "This park has great birdwatching and tidepools to explore.",
-                            DogsAllowed = true,
+                            DogsAllowed = "yes",
                             Fee = 0,
                             Name = "Fogarty Creek State Recreation Area",
                             Status = "open"
@@ -86,9 +90,9 @@ namespace ParksApi.Migrations
                         new
                         {
                             ParkId = 4,
-                            CampingAllowed = false,
+                            CampingAllowed = "no",
                             Description = "Eons of acidic water seeping into marble rock created and decorated these wondrous marble halls.",
-                            DogsAllowed = false,
+                            DogsAllowed = "no",
                             Fee = 5,
                             Name = "Oregon Caves National Monument",
                             Status = "closed"
@@ -96,9 +100,9 @@ namespace ParksApi.Migrations
                         new
                         {
                             ParkId = 5,
-                            CampingAllowed = false,
+                            CampingAllowed = "no",
                             Description = "Colorful rock formations preserve a world class record of plant and animal evolution, changing climate, and past ecosystems that span over 40 million years.",
-                            DogsAllowed = false,
+                            DogsAllowed = "no",
                             Fee = 0,
                             Name = "John Day Fossil Beds National Monument",
                             Status = "open"
@@ -106,9 +110,9 @@ namespace ParksApi.Migrations
                         new
                         {
                             ParkId = 6,
-                            CampingAllowed = true,
+                            CampingAllowed = "yes",
                             Description = "This convergence of three geologically distinct mountain ranges has resulted in an area with unparalleled biological diversity and a tremendously varied landscape.",
-                            DogsAllowed = true,
+                            DogsAllowed = "yes",
                             Fee = 0,
                             Name = "Cascade-Siskiyou National Monument",
                             Status = "open"

@@ -4,7 +4,7 @@
 
 namespace ParksApi.Migrations
 {
-    public partial class AddModelDataAnnotations : Migration
+    public partial class AddDataAnnotationsToModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,25 @@ namespace ParksApi.Migrations
 
             migrationBuilder.UpdateData(
                 table: "Parks",
+                keyColumn: "DogsAllowed",
+                keyValue: null,
+                column: "DogsAllowed",
+                value: "");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "DogsAllowed",
+                table: "Parks",
+                type: "varchar(20)",
+                maxLength: 20,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "longtext",
+                oldNullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .OldAnnotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.UpdateData(
+                table: "Parks",
                 keyColumn: "Description",
                 keyValue: null,
                 column: "Description",
@@ -58,6 +77,25 @@ namespace ParksApi.Migrations
                 table: "Parks",
                 type: "varchar(500)",
                 maxLength: 500,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "longtext",
+                oldNullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .OldAnnotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.UpdateData(
+                table: "Parks",
+                keyColumn: "CampingAllowed",
+                keyValue: null,
+                column: "CampingAllowed",
+                value: "");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "CampingAllowed",
+                table: "Parks",
+                type: "varchar(20)",
+                maxLength: 20,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "longtext",
@@ -91,6 +129,17 @@ namespace ParksApi.Migrations
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.AlterColumn<string>(
+                name: "DogsAllowed",
+                table: "Parks",
+                type: "longtext",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "varchar(20)",
+                oldMaxLength: 20)
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .OldAnnotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.AlterColumn<string>(
                 name: "Description",
                 table: "Parks",
                 type: "longtext",
@@ -98,6 +147,17 @@ namespace ParksApi.Migrations
                 oldClrType: typeof(string),
                 oldType: "varchar(500)",
                 oldMaxLength: 500)
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .OldAnnotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "CampingAllowed",
+                table: "Parks",
+                type: "longtext",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "varchar(20)",
+                oldMaxLength: 20)
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
         }

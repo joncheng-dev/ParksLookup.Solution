@@ -25,8 +25,10 @@ namespace ParksApi.Migrations
                     Fee = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CampingAllowed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DogsAllowed = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    CampingAllowed = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DogsAllowed = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
