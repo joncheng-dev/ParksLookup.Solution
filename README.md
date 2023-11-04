@@ -140,7 +140,7 @@ Base URL: `http://localhost:5000`
 
 - For requests of type GET in which the purpose is to return 'all results' or 'any results matching specific criteria' — as opposed to returning a single park object via `ParkId` — the parameters listed in the table are _not_ required / are optional.
 - Requests of type POST require a request body with an object literal — complete and properly formatted, with all properties except for `ParkId`. The database will handle assigning a `ParkId` value. Refer to sample below.
-- Requests of type PUT require a request body with an object literal — complete and propertly formatted, with all properties, including the `ParkId`. Refer to sample below.
+- Requests of type PUT require a request body with an object literal — complete and properly formatted, with all properties, including the `ParkId`. Refer to sample below.
 
 ##### Sample POST Query Request Body
 
@@ -171,7 +171,7 @@ Base URL: `http://localhost:5000`
 
 #### Example GET Query without Search Parameters
 
-The following query will return the first ten results. This is equivalent of a "Get All" request, but only 10 results by order of numerical `ParkId` values will be returned due to implementation of pagination -- since default values of `pageIndex = 1` and `pageSize = 10`.
+The following query will return the first ten results. This is equivalent of a "Get All" request, but only 10 results by order of numerical `ParkId` values will be returned due to implementation of pagination -- because of default values `pageIndex = 1` and `pageSize = 10`.
 
 ```
 http://localhost:5000/api/Parks
@@ -255,7 +255,7 @@ http://localhost:5000/api/Parks/3
 
 #### Example POST Query
 
-The following query will add this entry to the database. Note that the `parkId` property is left out, but all others are included in the request body's object literal.
+The following query will add this entry to the database. Note that the `parkId` property is left out, but all others are included in the request body's object literal. Refer to sample request body above under "Sample POST Query Request Body".
 
 ```
 http://localhost:5000/api/Parks
