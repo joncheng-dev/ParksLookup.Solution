@@ -49,7 +49,7 @@ _3. Clone the repository from the GitHub link by entering in this command:_
 
 #### Set up a Connection String to Database
 
-_Navigate to the project's production directory `ParksApi.Solution/ParksApi`. Create a new file called `appsettings.json`. Within the `appsettings.json` file, add the following code snippet. Change the server and port as needed. Replace the `uid`, and `pwd` values with your username and password for MySQL. Under `database`, add a fitting name -- although `parks_api` is suggested for clarity of purpose._
+_Navigate to the project's production directory `ParksApi.Solution/ParksApi`. Create a new file called `appsettings.json`. Within the `appsettings.json` file, add the following code snippet. Change the server and port as needed. Replace the `uid`, and `pwd` values with your username and password for MySQL. Under `database`, add a fitting name — although `parks_api` is suggested for clarity of purpose._
 
 ```json
 {
@@ -68,7 +68,7 @@ _Navigate to the project's production directory `ParksApi.Solution/ParksApi`. Cr
 
 #### Check for Port Conflicts
 
-_In this app's `Properties/launchSettings.json` file, check to see that the `applicationUrl` key is set to a different set of ports than your client app -- if using one to query the API endpoints. In the ParksApi app, we have ports set to 5001 and 5000 as shown in the `launchSettings.json` snippet below._
+_In this app's `Properties/launchSettings.json` file, check to see that the `applicationUrl` key is set to a different set of ports than your client app — if using one to query the API endpoints. In the ParksApi app, we have ports set to 5001 and 5000 as shown in the `launchSettings.json` snippet below._
 
 ```json
 "ParksApi": {
@@ -136,47 +136,137 @@ Base URL: `http://localhost:5000`
 | campingAllowed | string  |  none   |  false   | Returns matches for values "yes" or "no".             |
 |  dogsAllowed   | string  |  none   |  false   | Returns matches for values "yes" or "no".             |
 
-#### Example Queries
+##### Notes Regarding Parameters
 
-The following query will return the first ten results.
+- For requests of type GET in which the purpose is to return 'all results' or 'any results matching specific criteria' — as opposed to returning a single park object via `ParkId` — the parameters listed in the table are _not_ required / are optional.
+- Requests of type POST require a request body with an object literal — complete and properly formatted, with all properties except for `ParkId`. The database will handle assigning a `ParkId` value. Refer to sample below.
+- Requests of type PUT require a request body with an object literal — complete and propertly formatted, with all properties, including the `ParkId`. Refer to sample below.
 
-```
-http://localhost:5000/api/Parks?pageIndex=1&pageSize=10
-```
+##### Sample POST Query Request Body
 
-The following query will return any parks with matching name `Crater Lake`.
-
-```
-http://localhost:5000/api/Parks?name=Crater%20Lake&pageIndex=1&pageSize=10
-```
-
-The following query will return the first ten results of parks with feeRequired valued at "yes".
-
-```
-http://localhost:5000/api/Parks?feeRequired=yes&pageIndex=1&pageSize=10
-
+```json
+{
+  "name": "The Ridgiest Ridge",
+  "description": "Where many claim the end of the rainbow resides.",
+  "feeRequired": "yes",
+  "status": "closed",
+  "campingAllowed": "yes",
+  "dogsAllowed": "yes"
+}
 ```
 
-The following query will return the first ten results of parks with feeRequired value at "no" and status value of "open".
+#### Sample PUT Query Request Body
+
+```json
+{
+  "parkId": 12,
+  "name": "Springfield National Park",
+  "description": "Bigfoot was spotted here.",
+  "feeRequired": "yes",
+  "status": "open",
+  "campingAllowed": "no",
+  "dogsAllowed": "no"
+}
+```
+
+#### Example GET Query without Search Parameters
+
+The following query will return the first ten results. This is equivalent of a "Get All" request, but only 10 results by order of numerical `ParkId` values will be returned due to implementation of pagination -- since default values of `pageIndex = 1` and `pageSize = 10`.
+
+```
+http://localhost:5000/api/Parks
+```
+
+#### Example GET Queries using Optional Search Parameters
+
+The following query will return the 2nd set of results (`pageIndex=2`) if each page is set to have 3 results (`pageSize=3`). Assuming there are 6 entries in the database, it would skip entries 1, 2, 3, and return entries 4, 5, and 6. Sample response provided below this segment.
+
+```
+http://localhost:5000/api/Parks?pageIndex=2&pageSize=3
+```
+
+The following query will return any parks with matching name "Crater Lake".
+
+```
+http://localhost:5000/api/Parks?name=Crater%20Lake
+```
+
+The following query will return the first ten results of parks with `feeRequired` value at "no" and `status` value of "open".
 
 ```
 http://localhost:5000/api/Parks?feeRequired=no&status=open&pageIndex=1&pageSize=10
 ```
 
-#### Sample JSON Response
+##### Sample Response - GET Query using Optional Search Parameters
 
 ```json
 [
   {
-    "parkId": 2,
-    "name": "Agate Beach State Recreation Site",
-    "description": "No agates, but a great place to see the sunset.",
+    "parkId": 4,
+    "name": "Oregon Caves National Monument",
+    "description": "Eons of acidic water seeping into marble rock created and decorated these wondrous marble halls.",
+    "feeRequired": "yes",
+    "status": "closed",
+    "campingAllowed": "no",
+    "dogsAllowed": "no"
+  },
+  {
+    "parkId": 5,
+    "name": "John Day Fossil Beds National Monument",
+    "description": "Colorful rock formations preserve a world class record of plant and animal evolution, changing climate, and past ecosystems that span over 40 million years.",
+    "feeRequired": "no",
+    "status": "open",
+    "campingAllowed": "no",
+    "dogsAllowed": "no"
+  },
+  {
+    "parkId": 6,
+    "name": "Cascade-Siskiyou National Monument",
+    "description": "This convergence of three geologically distinct mountain ranges has resulted in an area with unparalleled biological diversity and a tremendously varied landscape.",
     "feeRequired": "no",
     "status": "open",
     "campingAllowed": "yes",
     "dogsAllowed": "yes"
   }
 ]
+```
+
+#### Example GET Query for Specific Park Object -- Requires ParkId
+
+The following query will return a park with matching `ParkId` of 3.
+
+```
+http://localhost:5000/api/Parks/3
+```
+
+##### Sample Response - GET by ParkId
+
+```json
+{
+  "parkId": 3,
+  "name": "Fogarty Creek State Recreation Area",
+  "description": "This park has great birdwatching and tidepools to explore.",
+  "feeRequired": "no",
+  "status": "open",
+  "campingAllowed": "yes",
+  "dogsAllowed": "yes"
+}
+```
+
+#### Example POST Query
+
+The following query will add this entry to the database. Note that the `parkId` property is left out, but all others are included in the request body's object literal.
+
+```
+http://localhost:5000/api/Parks
+```
+
+#### Example PUT Query
+
+The following query will update the park object with the `ParkId` of 12. Note that the property `"parkId": 12` must be included in the request body's object literal. Refer to sample request body above under "Sample PUT Query Request Body".
+
+```
+http://localhost:5000/api/Parks/12
 ```
 
 ## Known Bugs
